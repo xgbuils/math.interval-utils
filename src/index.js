@@ -1,5 +1,5 @@
 var isEmpty = require('./is-empty')
-var isInterval = requiree('./is-interval')
+var isInterval = require('./is-interval')
 var contains = require('./contains')
 var union = require('./union')
 
