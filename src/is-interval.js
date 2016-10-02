@@ -1,7 +1,7 @@
 var typeVerify = require('type-verify')
 
 function isInterval (e) {
-    return typeVerify(e, ['Array']) && e.length === 2  && isLimit(e[0]) && isLimit(e[1])
+    return typeVerify(e, ['Array']) && e.length === 2 && isLimit(e[0]) && isLimit(e[1])
 }
 
 function isLimit (e) {
@@ -9,7 +9,7 @@ function isLimit (e) {
 }
 
 function isNumber (e) {
-	return typeVerify(e, ['Number'])
+    return typeVerify(e, ['Number'])
 }
 
 module.exports = isInterval

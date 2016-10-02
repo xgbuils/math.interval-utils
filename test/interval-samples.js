@@ -1,12 +1,4 @@
 module.exports = {
-    '(8, -4]': [{
-        value: -8,
-        limit: 1
-    }, {
-        value: -4,
-        limit: 0
-    }],
-
     '[-5, -2)': [{
         value: -5,
         limit: 0
@@ -285,5 +277,5 @@ module.exports = {
     }, {
         value: 95,
         limit: -1
-    }],
+    }]
 }
