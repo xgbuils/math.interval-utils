@@ -171,5 +171,37 @@ var interval2 = [
 isInterval(interval2) // false
 ```
 
+### parser(string)
+Given a string that represents an interval, it returns the interval that means. It throws an error if string does not represents an interval.
+
+Example:
+``` javascript
+var parser = require('math.interval-utils').parser
+
+parser('(2, 3]') /* returns [
+    {value: 2, limit: 1},
+    {value: 3, limit: 0}
+]*/
+
+parser('{5}') /* returns [
+    {value: 5, limit: 0},
+    {value: 5, limit: 0}
+]*/
+
+parser('(2, 5(') // throws an error
+```
+
+### numToInterval(num)
+Given a number as parameter, it returns an isolated interval that contains this number.
+
+Example:
+``` javascript
+var numToInterval = require('math.interval-utils').numToInterval
+
+numToInterval(5) /* returns [
+    {value: 5, limit: 0},
+    {value: 5, limit: 0}
+]*/
+```
 ## LICENSE
 MIT
