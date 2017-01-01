@@ -1,31 +1,31 @@
-var chai = require('chai')
-var expect = chai.expect
-var parser = require('../src/parser')
-var samples = require('./interval-samples')
+const chai = require('chai')
+const expect = chai.expect
+const parser = require('../src/parser')
+const samples = require('./interval-samples')
 
 describe('parser', function () {
     it('[4,5]', function () {
-        var interval = parser('[4,5]')
+        const interval = parser('[4,5]')
         expect(interval).to.be.deep.equal(samples['[4, 5]'])
     })
 
     it('[3, 9)', function () {
-        var interval = parser('[3, 9)')
+        const interval = parser('[3, 9)')
         expect(interval).to.be.deep.equal(samples['[3, 9)'])
     })
 
     it('(3 ,11]', function () {
-        var interval = parser('(3 ,11]')
+        const interval = parser('(3 ,11]')
         expect(interval).to.be.deep.equal(samples['(3, 11]'])
     })
 
     it('[ 7 ,  7 ]', function () {
-        var interval = parser('[ 7 , 7 ]')
+        const interval = parser('[ 7 , 7 ]')
         expect(interval).to.be.deep.equal(samples['{7}'])
     })
 
     it('{ 5}', function () {
-        var interval = parser('{ 5}')
+        const interval = parser('{ 5}')
         expect(interval).to.be.deep.equal(samples['{5}'])
     })
 

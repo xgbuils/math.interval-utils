@@ -1,16 +1,16 @@
-var chai = require('chai')
-var expect = chai.expect
-var union = require('../src/union')
-var samples = require('./interval-samples')
-var clone = require('clone')
+const chai = require('chai')
+const expect = chai.expect
+const union = require('../src/union')
+const samples = require('./interval-samples')
+const clone = require('clone')
 
 describe('union.js', function () {
     describe('an interval contains the other: [4,5] U [ 3 , 9) --> [3, 9)', function () {
-        var copies = {
+        const copies = {
             '[4, 5]': clone(samples['[4, 5]']),
             '[3, 9)': clone(samples['[3, 9)'])
         }
-        var intervalList = union([
+        const intervalList = union([
             samples['[4, 5]'],
             samples['[3, 9)']
         ])
@@ -28,11 +28,11 @@ describe('union.js', function () {
     })
 
     describe('union of disjoint sets: (0, 1](0, 1] U [ 3 , 9) --> [3, 9)', function () {
-        var copies = {
+        const copies = {
             '(0, 1]': clone(samples['(0, 1]']),
             '[3, 9)': clone(samples['[3, 9)'])
         }
-        var intervalList = union([
+        const intervalList = union([
             samples['(0, 1]'],
             samples['[3, 9)']
         ])
@@ -51,14 +51,14 @@ describe('union.js', function () {
     })
 
     describe('(4, 8) U [3 ,5) U {-1} U {7} --> {-1} U [3, 8)', function () {
-        var copies = {
+        const copies = {
             '(4, 8)': clone(samples['(4, 8)']),
             '[3, 5)': clone(samples['[3, 5)']),
             '{-1}': clone(samples['{-1}']),
             '{7}': clone(samples['{7}'])
         }
 
-        var intervalList = union([
+        const intervalList = union([
             samples['(4, 8)'],
             samples['[3, 5)'],
             samples['{-1}'],
@@ -81,7 +81,7 @@ describe('union.js', function () {
     })
 
     it('[5, 5] --> {5}', function () {
-        var intervalList = union([
+        const intervalList = union([
             samples['{5}']
         ])
 
@@ -91,7 +91,7 @@ describe('union.js', function () {
     })
 
     it('(3, 11] --> (3, 11]', function () {
-        var intervalList = union([
+        const intervalList = union([
             samples['(3, 11]']
         ])
 
@@ -101,7 +101,7 @@ describe('union.js', function () {
     })
 
     it('(3, 0] --> empty', function () {
-        var intervalList = union([
+        const intervalList = union([
             samples['(3, 0]']
         ])
 
@@ -109,11 +109,11 @@ describe('union.js', function () {
     })
 
     describe('(3, 0] U [7, 7] U (2, 7) --> (2, 7]', function () {
-        var copies = {
+        const copies = {
             '(2, 7)': clone(samples['(2, 7)']),
             '{7}': clone(samples['{7}'])
         }
-        var intervalList = union([
+        const intervalList = union([
             samples['(2, 7)'],
             samples['{7}']
         ])

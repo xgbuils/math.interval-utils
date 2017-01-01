@@ -1,4 +1,4 @@
-var limitComparator = require('./limit-comparator.js')
+const limitComparator = require('./limit-comparator.js')
 
 function isEmpty (interval) {
     return limitComparator(interval[0], interval[1]) > 0

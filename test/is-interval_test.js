@@ -1,16 +1,16 @@
-var chai = require('chai')
-var expect = chai.expect
-var isInterval = require('../src/is-interval')
+const chai = require('chai')
+const expect = chai.expect
+const isInterval = require('../src/is-interval')
 
 describe('isInterval', function () {
     describe('if beginning of first interval is less than begginning of second interval', function () {
         it('interval must be an array', function () {
-            var notArray = /a+/
+            const notArray = /a+/
             expect(isInterval(notArray)).to.be.equal(false)
         })
 
         it('interval must be an array of two elements', function () {
-            var threeItems = [{
+            const threeItems = [{
                 value: 1,
                 limit: 0
             }, {
@@ -24,12 +24,12 @@ describe('isInterval', function () {
         })
 
         it('interval must be an array with object items', function () {
-            var arrayOfNumbers = [5, 2]
+            const arrayOfNumbers = [5, 2]
             expect(isInterval(arrayOfNumbers)).to.be.equal(false)
         })
 
         it('items of interval must have a numeric `value` property', function () {
-            var arrayOfNumbers = [{
+            const arrayOfNumbers = [{
                 value: 3,
                 limit: 0
             }, {
@@ -40,7 +40,7 @@ describe('isInterval', function () {
         })
 
         it('items of interval must have a numeric `limit` property', function () {
-            var arrayOfNumbers = [{
+            const arrayOfNumbers = [{
                 value: 3,
                 limit: 0
             }, {

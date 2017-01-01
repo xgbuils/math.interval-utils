@@ -1,5 +1,5 @@
-var limitComparator = require('./limit-comparator')
-var isEmpty = require('./is-empty')
+const limitComparator = require('./limit-comparator')
+const isEmpty = require('./is-empty')
 
 function contains (a, b) {
     return isEmpty(b) || !isEmpty(a) && limitComparator(b[0], a[0]) >= 0 &&

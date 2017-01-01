@@ -1,11 +1,11 @@
-var chai = require('chai')
-var expect = chai.expect
-var contains = require('../src/contains')
-var samples = require('./interval-samples')
+const chai = require('chai')
+const expect = chai.expect
+const contains = require('../src/contains')
+const samples = require('./interval-samples')
 
 describe('contains', function () {
     describe('isolated: {-2}', function () {
-        var interval = samples['{-2}']
+        const interval = samples['{-2}']
 
         it('contains {-2}', function () {
             expect(contains(interval, samples['{-2}'])).to.be.equal(true)
@@ -34,7 +34,7 @@ describe('contains', function () {
     })
 
     describe('[1, 6)', function () {
-        var interval = samples['[1, 6)']
+        const interval = samples['[1, 6)']
 
         it('contains {2}', function () {
             expect(contains(interval, samples['{2}'])).to.be.equal(true)
@@ -60,7 +60,7 @@ describe('contains', function () {
     })
 
     describe('empty set: (3, -2)', function () {
-        var interval = samples['(3, -2)']
+        const interval = samples['(3, -2)']
 
         it('does not contain [1, 5)', function () {
             expect(contains(interval, samples['[1, 5)'])).to.be.equal(false)
