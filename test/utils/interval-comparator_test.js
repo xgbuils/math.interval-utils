@@ -1,7 +1,7 @@
 const chai = require('chai')
 const expect = chai.expect
-const intervalComparator = require('../src/interval-comparator')
-const samples = require('./interval-samples')
+const intervalComparator = require('../../src/utils/interval-comparator')
+const samples = require('../interval-samples')
 
 describe('intervalComparator', function () {
     describe('if beginning of first interval is less than begginning of second interval', function () {

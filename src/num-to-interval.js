@@ -1,11 +1,9 @@
 function numToInterval (num) {
-    return [{
+    const limit = {
         value: num,
         limit: 0
-    }, {
-        value: num,
-        limit: 0
-    }]
+    }
+    return [limit, Object.assign({}, limit)]
 }
 
 module.exports = numToInterval

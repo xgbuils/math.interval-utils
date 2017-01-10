@@ -1,9 +1,9 @@
-const limitComparator = require('./limit-comparator')
+const intersection = require('./intersection')
+const areEqual = require('./are-equal')
 const isEmpty = require('./is-empty')
 
 function contains (a, b) {
-    return isEmpty(b) || !isEmpty(a) && limitComparator(b[0], a[0]) >= 0 &&
-        limitComparator(b[1], a[1]) <= 0
+    return isEmpty(b) || areEqual(b, intersection(a, b))
 }
 
 module.exports = contains

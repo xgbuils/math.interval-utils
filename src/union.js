@@ -1,6 +1,7 @@
-const isEmpty = require('./is-empty.js')
-const intervalComparator = require('./interval-comparator.js')
-const limitComparator = require('./limit-comparator.js')
+const create = require('./utils/create')
+const intervalComparator = require('./utils/interval-comparator')
+const limitComparator = require('./utils/limit-comparator')
+const isEmpty = require('./is-empty')
 
 function union (intervals) {
     const arr = intervals.filter(function (interval) {
@@ -14,7 +15,7 @@ function union (intervals) {
 
     let count = 0
     let current = arr[count]
-    const result = [copyInterval(arr[count])]
+    const result = [create(...arr[count])]
 
     for (let i = 1; i < arr.length; ++i) {
         const currentEnd = current[1]
@@ -22,7 +23,7 @@ function union (intervals) {
         const itemStart = item[0]
         const diff = currentEnd.value - itemStart.value
         if (diff < 0 || diff === 0 && currentEnd.limit - itemStart.limit === -2) {
-            result.push(copyInterval(item))
+            result.push(create(...item))
             ++count
             current = result[count]
         } else if (limitComparator(currentEnd, item[1]) < 0) {
@@ -31,15 +32,6 @@ function union (intervals) {
     }
 
     return result
-}
-
-function copyInterval (interval) {
-    return interval.map(function (e) {
-        return {
-            value: e.value,
-            limit: e.limit
-        }
-    })
 }
 
 module.exports = union

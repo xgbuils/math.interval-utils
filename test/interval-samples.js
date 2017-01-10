@@ -39,6 +39,14 @@ module.exports = {
         limit: -1
     }],
 
+    '(-2, 0)': [{
+        value: -2,
+        limit: 1
+    }, {
+        value: 0,
+        limit: -1
+    }],
+
     '(-2, 1]': [{
         value: -2,
         limit: 1
@@ -60,6 +68,22 @@ module.exports = {
         limit: 1
     }, {
         value: 1,
+        limit: 0
+    }],
+
+    '(0, 2)': [{
+        value: 0,
+        limit: 1
+    }, {
+        value: 2,
+        limit: -1
+    }],
+
+    '(0, 2]': [{
+        value: 0,
+        limit: 1
+    }, {
+        value: 2,
         limit: 0
     }],
 
@@ -111,6 +135,16 @@ module.exports = {
         limit: -1
     }],
 
+    // empty
+    '(2, -2)': [{
+        value: 2,
+        limit: 1
+    }, {
+        value: -2,
+        limit: -1
+    }],
+
+    // empty
     '[2, 0)': [{
         value: 2,
         limit: 0
@@ -125,6 +159,14 @@ module.exports = {
     }, {
         value: 2,
         limit: 0
+    }],
+
+    '[2, 4)': [{
+        value: 2,
+        limit: 0
+    }, {
+        value: 4,
+        limit: -1
     }],
 
     '(2, 5)': [{
@@ -151,11 +193,28 @@ module.exports = {
         limit: 0
     }],
 
+    // empty
+    '[3, 0]': [{
+        value: 3,
+        limit: 0
+    }, {
+        value: 0,
+        limit: 0
+    }],
+
     '[3, 3]': [{
         value: 3,
         limit: 0
     }, {
         value: 3,
+        limit: 0
+    }],
+
+    '[3, 4]': [{
+        value: 3,
+        limit: 0
+    }, {
+        value: 4,
         limit: 0
     }],
 
@@ -217,6 +276,14 @@ module.exports = {
         limit: 0
     }],
 
+    '(4, -4)': [{
+        value: 4,
+        limit: 1
+    }, {
+        value: -4,
+        limit: -1
+    }],
+
     '(4, 5]': [{
         value: 4,
         limit: 1
@@ -257,11 +324,27 @@ module.exports = {
         limit: -1
     }],
 
+    '[5, 8)': [{
+        value: 5,
+        limit: 0
+    }, {
+        value: 8,
+        limit: -1
+    }],
+
     '{5}': [{
         value: 5,
         limit: 0
     }, {
         value: 5,
+        limit: 0
+    }],
+
+    '(5, 9]': [{
+        value: 5,
+        limit: 1
+    }, {
+        value: 9,
         limit: 0
     }],
 
@@ -290,6 +373,15 @@ module.exports = {
         limit: 0
     }],
 
+    '(10, 12]': [{
+        value: 10,
+        limit: 1
+    }, {
+        value: 12,
+        limit: 0
+    }],
+
+    // empty
     '(100, 10)': [{
         value: 100,
         limit: 1
@@ -298,6 +390,7 @@ module.exports = {
         limit: -1
     }],
 
+    // empty
     '(100, 95)': [{
         value: 100,
         limit: 1

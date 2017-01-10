@@ -3,49 +3,97 @@ const expect = chai.expect
 const isInterval = require('../src/is-interval')
 
 describe('isInterval', function () {
-    describe('if beginning of first interval is less than begginning of second interval', function () {
-        it('interval must be an array', function () {
+    describe('interval must be an array of length 2', function () {
+        it('it returns false if it is passed a regexp', function () {
             const notArray = /a+/
             expect(isInterval(notArray)).to.be.equal(false)
         })
 
-        it('interval must be an array of two elements', function () {
+        it('it returns false if it is not an array of 2 elements', function () {
             const threeItems = [{
-                value: 1,
+                value: 7,
                 limit: 0
-            }, {
-                value: 3,
-                limit: -1
             }, {
                 value: 5,
                 limit: -1
+            }, {
+                value: 3,
+                limit: 1
             }]
             expect(isInterval(threeItems)).to.be.equal(false)
         })
+    })
 
-        it('interval must be an array with object items', function () {
+    describe('interval must have object as items', function () {
+        it('it returns false if not', function () {
             const arrayOfNumbers = [5, 2]
             expect(isInterval(arrayOfNumbers)).to.be.equal(false)
         })
+    })
 
-        it('items of interval must have a numeric `value` property', function () {
+    describe('each item of interval must have `value` and `limit` properties', function () {
+        it('it returns false if `value` is not numeric', function () {
             const arrayOfNumbers = [{
-                value: 3,
+                value: 1,
                 limit: 0
             }, {
                 value: 'foo',
+                limit: -1
+            }]
+            expect(isInterval(arrayOfNumbers)).to.be.equal(false)
+        })
+
+        it('it returns true if `value` is numeric', function () {
+            const arrayOfNumbers = [{
+                value: -1,
+                limit: 1
+            }, {
+                value: new Number(-3),
+                limit: 0
+            }]
+            expect(isInterval(arrayOfNumbers)).to.be.equal(true)
+        })
+
+        it('it returns false if `limit` is different to -1, 0 or 1', function () {
+            const arrayOfNumbers = [{
+                value: -1,
+                limit: new Number(5)
+            }, {
+                value: -5,
                 limit: 0
             }]
             expect(isInterval(arrayOfNumbers)).to.be.equal(false)
         })
 
-        it('items of interval must have a numeric `limit` property', function () {
+        it('it returns true if `limit` is 0', function () {
             const arrayOfNumbers = [{
-                value: 3,
+                value: 6,
                 limit: 0
             }, {
-                value: 5,
-                limit: 0
+                value: -2,
+                limit: new Number(0)
+            }]
+            expect(isInterval(arrayOfNumbers)).to.be.equal(true)
+        })
+
+        it('it returns true if `limit` is -1', function () {
+            const arrayOfNumbers = [{
+                value: 6,
+                limit: new Number(-1)
+            }, {
+                value: -2,
+                limit: -1
+            }]
+            expect(isInterval(arrayOfNumbers)).to.be.equal(true)
+        })
+
+        it('it returns true if `limit` is 1', function () {
+            const arrayOfNumbers = [{
+                value: 6,
+                limit: 1
+            }, {
+                value: -2,
+                limit: new Number(1)
             }]
             expect(isInterval(arrayOfNumbers)).to.be.equal(true)
         })

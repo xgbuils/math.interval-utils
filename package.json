@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "lint": "eslint ./**/*.js",
-    "mocha": "mocha test/**/*_test.js",
+    "lint": "eslint .",
+    "mocha": "mocha --recursive",
     "test": "npm run lint && npm run mocha"
   },
   "repository": {
