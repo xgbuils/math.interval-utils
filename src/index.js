@@ -7,19 +7,19 @@ const isInterval = require('./is-interval')
 const multiIntersection = require('./multi-intersection')
 const numToInterval = require('./num-to-interval')
 const parser = require('./parser')
-const relativeComplement = require('./relativeComplement')
+const relativeComplement = require('./relative-complement')
 const union = require('./union')
 
 module.exports = {
-	areDisjoint: areDisjoint,
-	areEqual: areEqual,
-	contains: contains,
-	intersection: intersection,
-    isEmpty: isEmpty,
-    isInterval: isInterval,
-    multiIntersection: multiIntersection
-    numToInterval: numToInterval,
-    parser: parser,
-    relativeComplement: relativeComplement
-    union: union
+    areDisjoint,
+    areEqual,
+    contains,
+    intersection,
+    isEmpty,
+    isInterval,
+    multiIntersection,
+    numToInterval,
+    parser,
+    relativeComplement,
+    union
 }
