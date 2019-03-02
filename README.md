@@ -36,7 +36,7 @@ npm install math.inteval-utils --save
 
 ### Data structure and valid values
 
-Real interval can be represented with an pair of real numbers and two flags to indicate if these numbers are included or not in interval. This library defines the interval as an array of two objects with `value` and `limit`:
+Real interval can be represented with an pair of real numbers and two flags to indicate if these numbers are included or not in interval. This library defines the `Interval` type as the set of arrays of two objects with `value` and `limit` number properties:
 
 ``` javascript
 [
@@ -50,6 +50,7 @@ Real interval can be represented with an pair of real numbers and two flags to i
     }
 ]
 ```
+
 `value` properties correspond to the values of interval and `limit` properties correspond to if values of interval are included or not.
 - If limit is `0`, it indicates that value is included.
 - If the `limit` of first item is `1` , it indicates that first `value` is not included in interval.
@@ -105,27 +106,27 @@ An interval is empty in these cases:
 
 ## Functions
 
-### areDisjoint(interval1, interval2)
-Given `interval1` and `interval2`, it returns `true` or `false` if intervals are disjoint or not, respectively.
+### areDisjoint :: (Interval, Interval) -> Boolean
+Given two interval inputs, it returns `true` or `false` depending on intervals are disjoint or not, respectively.
 
 Example:
 ``` javascript
-var areDisjoint = require('math.interval-utils').areDisjoint
+const { areDisjoint } = require('math.interval-utils')
 
 // [1, 3)
-var interval1 = [
+const interval1 = [
     {value: 1, limit: 0},
     {value: 3, limit: -1}
 ]
 
 // (1, 2)
-var interval2 = [
+const interval2 = [
     {value: 1, limit: 1},
     {value: 2, limit: -1}
 ]
 
 // {1}
-var interval3 = [
+const interval3 = [
     {value: 1, limit: 0},
     {value: 1, limit: 0}
 ]
@@ -134,27 +135,27 @@ areDisjoint(interval1, interval2) // false
 areDisjoint(interval2, interval3) // true
 ```
 
-### areEqual(interval1, interval2)
-Given `interval1` and `interval2`, it returns `true` or `false` if intervals are equal or not, respectively.
+### areEqual :: (Interval, Interval) -> Boolean
+Given two interval inputs, it returns `true` or `false` depending on intervals are equal or not, respectively.
 
 Example:
 ``` javascript
-var areEqual = require('math.interval-utils').areEqual
+const { areEqual } = require('math.interval-utils')
 
 // [1, 3)
-var interval1 = [
+const interval1 = [
     {value: 1, limit: 0},
     {value: 3, limit: -1}
 ]
 
 // [1, 3)
-var interval1 = [
+const interval2 = [
     {value: 1, limit: 0},
     {value: 3, limit: -1}
 ]
 
 // [1, 3]
-var interval3 = [
+const interval3 = [
     {value: 1, limit: 0},
     {value: 3, limit: 0}
 ]
@@ -163,21 +164,21 @@ areEqual(interval1, interval2) // true
 areEqual(interval2, interval3) // false
 ```
 
-### contains(interval1, interval2)
-Given `interval1` and `interval2`, it returns `true` or `false` if `interval1` contains `interval2` or not, respectively.
+### contains :: (Interval, Interval) -> Boolean
+Given two interval inputs, it returns `true` or `false` if first interval contains the second interval or not, respectively.
 
 Example:
 ``` javascript
-var contains = require('math.interval-utils').contains
+const { contains } = require('math.interval-utils')
 
 // [1, 3)
-var interval1 = [
+const interval1 = [
     {value: 1, limit: 0},
     {value: 3, limit: -1}
 ]
 
 // (1, 2)
-var interval2 = [
+const interval2 = [
     {value: 1, limit: 1},
     {value: 2, limit: -1}
 ]
@@ -186,57 +187,57 @@ contains(interval1, interval2) // true
 contains(interval2, interval1) // false
 ```
 
-### intersection(interval1, interval2)
-Given `interval1` and `interval2`, it returns the intersection of intervals.
+### intersection :: (Interval, Interval) -> Interval
+Given two interval inputs, it returns the intersection of these intervals.
 
 Example:
 ``` javascript
-var intersection = require('math.interval-utils').intersection
-
+const { intersection } = require('math.interval-utils')
+const I = {}
 // [1, 3)
-var interval1 = [
+I['[1, 3)'] = [
     {value: 1, limit: 0},
     {value: 3, limit: -1}
 ]
 
 // (1, 2)
-var interval2 = [
+I['(1, 2)'] = [
     {value: 1, limit: 1},
     {value: 2, limit: -1}
 ]
 
 // (3, 4)
-var interval3 = [
+I['(3, 4)'] = [
     {value: 3, limit: 1},
     {value: 4, limit: -1}
 ]
 
-intersection(interval1, interval2) // (1, 2)
-intersection(interval2, interval3) // (3, 4)
-intersection(interval1, interval3) // empty
+intersection(I['[1, 3)'], I['(1, 2)']) // (1, 2)
+intersection(I['(1, 2)'], I['(3, 4)']) // (3, 4)
+intersection(I['[1, 3)'], I['(3, 4)']) // empty
 ```
 
-### isEmpty(interval)
+### isEmpty :: Interval -> Boolean
 Given an `interval`, it returns `true` or `false` if `interval` [is empty](#empty-interval) or not, respectively.
 
 Example:
 ``` javascript
-var isEmpty = require('math.interval-utils').isEmpty
+const { isEmpty } = require('math.interval-utils')
 
 // [2, -2]
-var interval1 = [
+const interval1 = [
     {value: 2, limit: 0},
     {value: -2, limit: 0}
 ]
 
 // (1, 1]
-var interval2 = [
+const interval2 = [
     {value: 1, limit: 1},
     {value: 1, limit: 0}
 ]
 
 // [1, 1]
-var interval3 = [
+const interval3 = [
     {value: 1, limit: 0},
     {value: 1, limit: 0}
 ]
@@ -246,23 +247,23 @@ isEmpty(interval2) // true
 isEmpty(interval3) // false
 ```
 
-### isInterval(interval)
-It returns `true` or `false` if `interval` is a data structure defined [above](#interval).
+### isInterval :: Interval -> Boolean
+It returns `true` or `false` if `interval` is an [Interval](#interval).
 
 Example:
 ``` javascript
-var isInterval = require('math.interval-utils').isInterval
+const { isInterval } = require('math.interval-utils')
 
-var interval1 = [
+const interval1 = [
     {value: 2, limit: 0},
     {value: -2, limit: 0}
 ]
 
-var interval2 = [
+const interval2 = [
     {value: -2, limit: 0}
 ]
 
-var interval3 = [
+const interval3 = [
     {value: 2, limit: 0},
     {value: Infinity, limit: -1}
 ]
@@ -272,8 +273,8 @@ isInterval(interval2) // false
 isInterval(interval3) // true
 ```
 
-### multiIntersection(listIntervals1, listIntervals2)
-Given two sorted lists of disjoint intervals `listIntervals1` and `listIntervals2`, it returns a list of intervals that represent the intersection of these.
+### multiIntersection :: ([Interval], [Interval]) -> [Interval]
+Given two lists of disjoint sorted intervals, it returns a new list of disjoint sorted intervals that represent the intersection of these sets.
 
 Example:
 ``` javascript
@@ -314,69 +315,70 @@ multiIntersection(listIntervals1, listIntervals2) // [[
 ]]
 ```
 
-This method has better perfomance that recolect the intersections of each interval of each lists and intersects one by one.
+This method has better perfomance than recolecting the intersections of each interval of each lists and intersecting one by one.
 
-### numToInterval(num)
-Given a number as parameter, it returns an singleton interval that contains this number.
+### numToInterval :: Number -> Interval
+Given a number input, it returns an singleton interval that contains this number.
 
 Example:
 ``` javascript
-var numToInterval = require('math.interval-utils').numToInterval
+const { numToInterval } = require('math.interval-utils')
 
-// returns {5}
+// returns {5} or [5, 5]
 numToInterval(5) /* returns [
     {value: 5, limit: 0},
     {value: 5, limit: 0}
 ]*/
 ```
 
-### parser(string)
-Given a string that represents an interval, it returns the interval that means. It throws an error if string does not represents an interval.
+### parser :: string -> Either Interval String
+Given a string that represents an interval, it returns an Either.Right value that saves an interval. If the string does not represent an interval it returns and Either.Left value that saves an error.
 
 Example:
 ``` javascript
-const parser = require('math.interval-utils').parser
+const { Right, Left } = require('data.either')
+const { parser } = require('math.interval-utils')
 
-parser('(2, 3]') /* returns [
+parser('(2, 3]') /* Right [
     {value: 2, limit: 1},
     {value: 3, limit: 0}
-]*/
+] */
 
-parser('{5}') /* returns [
+parser('{5}') /* Right([
     {value: 5, limit: 0},
     {value: 5, limit: 0}
-]*/
+]) */
 
-parser('(2, 5(') // throws an error
+parser('(2, 5(') // Left('"(2, 5(" does not match to interval expression')
 ```
 
-### relativeComplement(interval1, interval2)
-Given `interval1` and `interval2` parameters, it returns a list of intevals that represents the relative complement. (`interval1 / interval2`).
+### relativeComplement :: (Interval, Interval) -> [Interval]
+Given two interval inputs, it returns a list of intevals that represents the relative complement. It means, the set of numbers that belongs to the first interval but not the second.
 
 Example:
 ``` javascript
-const intersection = require('math.interval-utils').intersection
-
+const { relativeComplement } = require('math.interval-utils')
+const I = {}
 // [1, 5)
-const interval1 = [
+I['[1, 5)'] = [
     {value: 1, limit: 0},
     {value: 5, limit: -1}
 ]
 
 // (2, 3)
-const interval2 = [
+I['(2, 3)'] = [
     {value: 2, limit: 1},
-    {value: 2, limit: -1}
+    {value: 3, limit: -1}
 ]
 
 // [4, 6]
-const interval3 = [
-    {value: 3, limit: 1},
-    {value: 4, limit: -1}
+I['[4, 6]'] = [
+    {value: 4, limit: 0},
+    {value: 6, limit: 0}
 ]
 
 // returns [1, 2] U [3, 5)
-intersection(interval1, interval2) /* [[
+relativeComplement(I['[1, 5)'], I['(2, 3)']) /* [[
   {value: 1, limit: 0},
   {value: 2, limit: 0}
 ], [
@@ -385,54 +387,54 @@ intersection(interval1, interval2) /* [[
 ]] */
 
 // returns [1, 4)
-intersection(interval1, interval3) /* [[
+relativeComplement(I['[1, 5)'], I['[4, 6]']) /* [[
   {value: 1, limit: 0},
   {value: 4, limit: -1}
 ]] */
 
 // returns (2, 3)
-intersection(interval2, interval3) /* [[
+relativeComplement(I['(2, 3)'], I['[4, 6]']) /* [[
     {value: 2, limit: 1},
-    {value: 2, limit: -1}
+    {value: 3, limit: -1}
 ]] */
 ```
 
-// returns empty
-intersection(interval2, interval1) // []
+// returns empty array
+relativeComplement(I['(2, 3)'], I['[1, 5)']) // []
 
-### union(...intervals)
-Given interval parameters, it returns a sorted list of disjoint intervals that represents the union of these intervals.
+### union :: [Interval] -> [Interval]
+Given an array of intervals, it returns an array of sorted disjoint intervals that represents the union of these intervals.
 
 Example:
 ``` javascript
-var union = require('math.interval-utils').union
-
+const { union } = require('math.interval-utils').union
+const I = {}
 // [1, 3)
-var interval1 = [
+I['[1, 3)'] = [
     {value: 1, limit: 0},
     {value: 3, limit: -1}
 ]
 
 // (2, 4)
-var interval2 = [
+I['(2, 4)'] = [
     {value: 2, limit: 1},
     {value: 4, limit: -1}
 ]
 
 // [5, 5]
-var interval3 = [
+I['[5, 5]'] = [
     {value: 5, limit: 0},
     {value: 5, limit: 0}
 ]
 
 // (5, 6)
-var interval4 = [
+I['(5, 6)'] = [
     {value: 5, limit: 1},
     {value: 6, limit: -1}
 ]
 
 // returns [1, 4) U [5, 6)
-union(interval1, interval2 interval3, interval4) /* [[
+union([interval1, interval2 interval3, interval4]) /* [[
     {value: 1, limit: 0},
     {value: 4, limit: -1}
 ], [
