@@ -43,6 +43,17 @@ describe('isInterval', function () {
             expect(isInterval(arrayOfNumbers)).to.be.equal(false)
         })
 
+        it('it returns false if `value` is NaN', function () {
+            const arrayOfNumbers = [{
+                value: NaN,
+                limit: -1
+            }, {
+                value: 5,
+                limit: 1
+            }]
+            expect(isInterval(arrayOfNumbers)).to.be.equal(false)
+        })
+
         it('it returns true if `value` is numeric', function () {
             const arrayOfNumbers = [{
                 value: -1,
