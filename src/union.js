@@ -4,10 +4,9 @@ const limitComparator = require('./utils/limit-comparator')
 const isEmpty = require('./is-empty')
 
 function union (intervals) {
-    const arr = intervals.filter(function (interval) {
-        return !isEmpty(interval)
-    })
-    .sort(intervalComparator)
+    const arr = intervals
+        .filter((interval) => !isEmpty(interval))
+        .sort(intervalComparator)
 
     if (arr.length === 0) {
         return []

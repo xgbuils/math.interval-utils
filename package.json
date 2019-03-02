@@ -7,9 +7,14 @@
     "test": "test"
   },
   "scripts": {
+    "test": "npm run lint && npm run test-only && npm run check",
+    "test-only": "mocha --recursive",
+    "test-ci": "npm run lint && npm run check && npm run coveralls",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec --recursive && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "cov": "istanbul cover _mocha -- -R spec --recursive",
     "lint": "eslint .",
-    "mocha": "mocha --recursive",
-    "test": "npm run lint && npm run mocha"
+    "lint-fix": "eslint . --fix",
+    "check": "npm-check -i pre-commit"
   },
   "repository": {
     "type": "git",
@@ -28,13 +33,16 @@
   },
   "homepage": "https://github.com/xgbuils/math.interval-utils#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.2.0",
     "clone": "^2.0.0",
-    "eslint": "^3.7.0",
-    "mocha": "^3.1.0"
+    "coveralls": "^3.0.3",
+    "eslint": "^5.15.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^6.0.2",
+    "npm-check": "^5.9.0"
   },
   "dependencies": {
     "data.either": "^1.5.2",
-    "type-verify": "^0.3.0"
+    "type-verify": "^0.4.0"
   }
 }

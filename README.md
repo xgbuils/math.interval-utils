@@ -1,5 +1,10 @@
 # math.interval-utils
 
+[![travis ci][1]][2]
+[![npm version][3]][4]
+[![Coverage Status][5]][6]
+[![Dependency Status][7]][8]
+
 This library provides a data structure and functions to do operations with intervals.
 
 ## Version
@@ -438,3 +443,12 @@ union(interval1, interval2 interval3, interval4) /* [[
 
 ## LICENSE
 MIT
+
+  [1]: https://travis-ci.org/xgbuils/math.interval-utils.svg?branch=master
+  [2]: https://travis-ci.org/xgbuils/math.interval-utils
+  [3]: https://badge.fury.io/js/math.interval-utils.svg
+  [4]: https://badge.fury.io/js/math.interval-utils
+  [5]: https://coveralls.io/repos/github/xgbuils/math.interval-utils/badge.svg?branch=master
+  [6]: https://coveralls.io/github/xgbuils/math.interval-utils?branch=master
+  [7]: https://david-dm.org/xgbuils/math.interval-utils.svg
+  [8]: https://david-dm.org/xgbuils/math.interval-utils
