@@ -1,43 +1,61 @@
+const {Right, Left} = require('data.either')
+
+const appendTo = (array) => (value) => {
+    array.push(value)
+    return array
+}
+
+const parseLimit = chars => str => Right(chars[str])
+const parseLeftLimit = parseLimit({
+    '(': 1,
+    '[': 0
+})
+const parseRightLimit = parseLimit({
+    ']': 0,
+    ')': -1
+})
+
+const parseToNumber = str => {
+    const num = Number(str)
+    return isNaN(num)
+        ? Left(`"${str}" is not a number`)
+        : Right(num)
+}
+
+const parseChunkActions = [
+    parseLeftLimit,
+    parseToNumber,
+    parseToNumber,
+    parseRightLimit
+]
+
+const parseStringInterval = (intervalChunks) => {
+    return parseChunkActions.reduce((interval, parseChunk, index) => {
+        return interval.chain((interval) => {
+            return parseChunk(intervalChunks[index])
+                .map(appendTo(interval))
+        })
+    }, Right([]))
+}
+
 function parseStringToValues (str) {
     const matches = /^\{\s*(\S+)\s*\}|([\(\[])\s*(\S+)\s*,\s*(\S+)\s*([\)\]])$/.exec(str)
     if (!matches) {
-        throw new Error('"' + str + '" does not match to interval expression')
+        return Left(`"${str}" does not match to interval expression`)
     }
     const value = matches[1]
-    if (value) {
-        const num = Number(value)
-        assertNum(num, value)
-        return [0, num, num, 0]
-    }
-    return matches.slice(2).map(function (value, index) {
-        if ((index === 1 || index === 2)) {
-            const num = Number(value)
-            assertNum(num, value)
-            return num
-        } else {
-            return {
-                '(': 1,
-                '[': 0,
-                ']': 0,
-                ')': -1
-            }[value]
-        }
-    })
-}
-
-function assertNum (num, value) {
-    if (isNaN(num)) {
-        throw new Error('"' + value + '" is not a number')
-    }
+    return value
+        ? parseToNumber(value).map(num => ([0, num, num, 0]))
+        : parseStringInterval(matches.slice(2))
 }
 
 module.exports = function stringToInterval (e) {
-    const values = parseStringToValues(e)
-    return [{
-        value: values[1],
-        limit: values[0]
-    }, {
-        value: values[2],
-        limit: values[3]
-    }]
+    return parseStringToValues(e)
+        .map(values => [{
+            value: values[1],
+            limit: values[0]
+        }, {
+            value: values[2],
+            limit: values[3]
+        }])
 }
