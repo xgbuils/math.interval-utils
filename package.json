@@ -1,6 +1,6 @@
 {
   "name": "math.interval-utils",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "operations with intervals of real numbers",
   "main": "src/index.js",
   "directories": {
